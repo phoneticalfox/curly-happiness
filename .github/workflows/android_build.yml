@@ -41,7 +41,8 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values
           mkdir -p $GITHUB_WORKSPACE/LLMChatApp/app
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/build.gradle
+          cat <<EOL > 
+          $GITHUB_WORKSPACE/LLMChatApp/build.gradle
 plugins {
     id 'com.android.application'
 }
