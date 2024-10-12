@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -41,40 +41,38 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values
           mkdir -p $GITHUB_WORKSPACE/LLMChatApp/app
 
-          cat <<EOL > 
-          $GITHUB_WORKSPACE/LLMChatApp/build.gradle
-plugins {
-    id 'com.android.application'
-}
+          # Create build.gradle file
+          echo "plugins { id 'com.android.application' }" > $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "android {" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    compileSdk 31" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    defaultConfig {" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        applicationId \"com.example.llmchatapp\"" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        minSdk 21" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        targetSdk 31" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        versionCode 1" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        versionName \"1.0\"" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    }" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    buildTypes {" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        release {" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "            minifyEnabled false" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "        }" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    }" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "}" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "dependencies {" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    implementation 'com.google.android.material:material:1.8.0'" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    implementation 'com.squareup.retrofit2:retrofit:2.9.0'" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "    implementation 'org.nanohttpd:nanohttpd:2.3.1'" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
+          echo "}" >> $GITHUB_WORKSPACE/LLMChatApp/app/build.gradle
 
-android {
-    compileSdk 31
-
-    defaultConfig {
-        applicationId "com.example.llmchatapp"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-dependencies {
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'org.nanohttpd:nanohttpd:2.3.1'
-}
-EOL
-
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/AndroidManifest.xml
+          # Create AndroidManifest.xml
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/AndroidManifest.xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.llmchatapp">
 
@@ -98,9 +96,10 @@ EOL
         <activity android:name=".SettingsActivity" />
     </application>
 </manifest>
-EOL
+EOF
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/MainActivity.kt
+          # Create MainActivity.kt
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/MainActivity.kt
 package com.example.llmchatapp
 
 import android.content.Intent
@@ -149,9 +148,10 @@ class MainActivity : AppCompatActivity() {
         localHttpServer.stop()
     }
 }
-EOL
+EOF
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/LocalHttpServer.kt
+          # Create LocalHttpServer.kt
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/LocalHttpServer.kt
 package com.example.llmchatapp
 
 import fi.iki.elonen.nanonetwork.NanoHTTPD
@@ -167,9 +167,10 @@ class LocalHttpServer(port: Int) : NanoHTTPD(port) {
         return "Echo: $message" // Placeholder response
     }
 }
-EOL
+EOF
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/SettingsActivity.kt
+          # Create SettingsActivity.kt
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/java/com/example/llmchatapp/SettingsActivity.kt
 package com.example.llmchatapp
 
 import android.os.Bundle
@@ -185,26 +186,29 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        loadModelButton = findViewById(R.id.loadModelButton)
-        deleteModelButton = findViewById(R.id.deleteModelButton)
-        combineModelsButton = findViewById(R.id.combineModelsButton)
+        loadModelButton = findView
 
-        loadModelButton.setOnClickListener {
-            // Logic to load a model
-        }
+android:id="@+id/loadModelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Model" />
 
-        deleteModelButton.setOnClickListener {
-            // Logic to delete a model
-        }
+    <Button
+        android:id="@+id/deleteModelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Model" />
 
-        combineModelsButton.setOnClickListener {
-            // Logic to combine models
-        }
-    }
-}
-EOL
+    <Button
+        android:id="@+id/combineModelsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Combine Models" />
+</LinearLayout>
+EOF
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/layout/activity_main.xml
+          # Create the layout for MainActivity
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/layout/activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -238,9 +242,10 @@ EOL
         android:layout_marginTop="16dp"
         android:theme="@style/Theme.MaterialComponents" />
 </LinearLayout>
-EOL
+EOF
 
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/layout/activity_settings.xml
+          # Create the layout for SettingsActivity
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/layout/activity_settings.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -254,7 +259,7 @@ EOL
         android:textSize="24sp"
         android:paddingBottom="16dp" />
 
-        <Button
+    <Button
         android:id="@+id/loadModelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -272,10 +277,10 @@ EOL
         android:layout_height="wrap_content"
         android:text="Combine Models" />
 </LinearLayout>
-EOL
+EOF
 
           # Create styles.xml for theming
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values/styles.xml
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values/styles.xml
 <resources>
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/purple_500</item>
@@ -285,21 +290,21 @@ EOL
         <item name="colorOnSecondary">@android:color/black</item>
     </style>
 </resources>
-EOL
+EOF
 
           # Create colors.xml for theming
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values/colors.xml
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/app/src/main/res/values/colors.xml
 <resources>
     <color name="purple_500">#6200EE</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
 </resources>
-EOL
+EOF
 
           # Create a settings.gradle file
-          cat <<EOL > $GITHUB_WORKSPACE/LLMChatApp/settings.gradle
+          cat <<EOF > $GITHUB_WORKSPACE/LLMChatApp/settings.gradle
 include ':app'
-EOL
+EOF
 
           # Change directory to app and create gradle wrapper
           cd $GITHUB_WORKSPACE/LLMChatApp || exit
