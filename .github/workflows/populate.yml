@@ -1,0 +1,23 @@
+name: Setup LoomChat
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make scripts executable
+        run: chmod +x setup_loomchat.sh finalize_setup.sh
+
+      - name: Run setup script
+        run: ./setup_loomchat.sh
+
+      - name: Finalize setup
+        run: ./finalize_setup.sh
