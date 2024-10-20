@@ -13,14 +13,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Make scripts executable
-        run: chmod +x setup_loomchat.sh
-
-      - name: Run setup script
-        run: ./setup_loomchat.sh
-
-      - name: chmod finalize 
-      - run: chmod +x finalize_setup.sh
-
-      - name: run
-      - run: ./finalize_setup.sh
+      - run: pwd > pwd.txt
