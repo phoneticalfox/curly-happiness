@@ -13,6 +13,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-        - name: run
-               run: reboot
-      
+      - name: Run reboot
+        run: reboot
