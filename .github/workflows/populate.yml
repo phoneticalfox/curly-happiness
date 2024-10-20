@@ -18,3 +18,6 @@ jobs:
 
       - name: Run setup script
         run: ./setup_loomchat.sh
+
+      - name: chmod finalize 
+      - run: chmod +x finalize_setup.sh
