@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define variables
-USERNAME="YOUR_USERNAME"  # Replace YOUR_USERNAME with your GitHub username
+USERNAME="phoneticalfox"  # Replace YOUR_USERNAME with your GitHub username
 REPO_NAME="loomchat"
 REPO_URL="https://github.com/$USERNAME/$REPO_NAME.git"
 DIR_NAME="loomchat"
