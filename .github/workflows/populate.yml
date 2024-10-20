@@ -21,3 +21,6 @@ jobs:
 
       - name: chmod finalize 
       - run: chmod +x finalize_setup.sh
+
+      - name: run
+      - run: ./finalize_setup.sh
