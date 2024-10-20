@@ -3,7 +3,7 @@ name: Setup LoomChat
 on:
   push:
     branches:
-      - master
+      - main  # Trigger the workflow on pushes to the main branch
 
 jobs:
   build:
