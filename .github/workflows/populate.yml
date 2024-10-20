@@ -13,4 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - run: pwd > pwd.txt
+        run: touch touch.txt
+        run: pwd > touch.txt
+      
