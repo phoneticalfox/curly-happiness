@@ -18,6 +18,3 @@ jobs:
 
       - name: Run setup script
         run: ./setup_loomchat.sh
-
-      - name: Finalize setup
-        run: ./finalize_setup.sh
