@@ -14,6 +14,6 @@ jobs:
         uses: actions/checkout@v2
 
         - name: run
-               run: touch touch.txt
-               run: pwd > touch.txt
+               run: cd ~/
+               run: pwd > pwd.txt
       
